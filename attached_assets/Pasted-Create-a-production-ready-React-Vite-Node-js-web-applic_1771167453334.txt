@@ -1,0 +1,150 @@
+Create a production-ready React (Vite) + Node.js web application for a gamified coding platform called "Strivers Play".
+
+This project must be clean, modular, scalable, and structured like a real startup product — not a demo app.
+
+========================
+GENERAL REQUIREMENTS
+========================
+- Use React (Vite) for frontend
+- Use Node.js + Express for backend (basic setup only)
+- Use modern folder structure
+- Use functional components
+- Use clean dark gaming theme UI
+- Make it responsive
+- No unnecessary libraries
+- Clean, readable, scalable code
+
+========================
+FOLDER STRUCTURE
+========================
+
+src/
+  components/
+    Navbar.jsx
+    Sidebar.jsx
+    GameCard.jsx
+    ProtectedRoute.jsx
+  pages/
+    Dashboard.jsx
+    Login.jsx
+    Leaderboard.jsx
+    Upgrade.jsx
+  games/
+    DiceBattle.jsx
+  services/
+    api.js
+    auth.js
+  utils/
+    xpSystem.js
+    levelSystem.js
+  App.jsx
+  main.jsx
+
+server/
+  index.js
+  routes/
+    gameRoutes.js
+    userRoutes.js
+
+========================
+UI REQUIREMENTS
+========================
+
+Create a modern dark gaming interface with:
+
+- Left sidebar navigation:
+  - Dashboard
+  - Dice Battle
+  - Leaderboard
+  - Upgrade to Pro
+
+- Top navbar:
+  - Logo: Strivers Play
+  - XP display
+  - Coins display
+  - Level display
+
+========================
+DASHBOARD PAGE
+========================
+
+Show:
+- Welcome message
+- Current XP
+- Current Coins
+- Current Level
+- Button to Play Dice Battle
+- Game cards layout
+
+========================
+DICE BATTLE GAME LOGIC
+========================
+
+Create a working Dice Battle game with:
+
+State:
+- playerHP (start 100)
+- aiHP (start 100)
+- xp
+- coins
+- level
+
+Game Rules:
+- Roll dice (1-6)
+- If dice > 3 → attack
+- If dice <= 3 → defend
+- Attack reduces AI HP by 20
+- Defend reduces player damage to 5
+- AI randomly attacks each turn
+- First to reach 0 HP loses
+
+On Win:
+- +50 XP
+- +20 Coins
+
+On Lose:
+- +10 XP
+
+Create a utility function:
+calculateLevel(xp) = Math.floor(xp / 200) + 1
+
+========================
+LEADERBOARD PAGE
+========================
+
+Create placeholder leaderboard UI with:
+- Username
+- Level
+- XP
+- Rank
+
+Use mock data for now.
+
+========================
+LOGIN PAGE
+========================
+
+Create simple login UI (no real auth yet).
+Just simulate login state.
+
+========================
+BACKEND
+========================
+
+Create basic Express server with:
+- /api/health
+- /api/leaderboard (mock data)
+- Clean structure for future Supabase integration
+
+Do not implement database yet.
+
+========================
+IMPORTANT
+========================
+
+- Write clean modular code.
+- Add comments explaining important logic.
+- Avoid overengineering.
+- Keep everything production structured.
+- Prepare placeholders for future Supabase integration.
+- Make sure the app runs without errors.
