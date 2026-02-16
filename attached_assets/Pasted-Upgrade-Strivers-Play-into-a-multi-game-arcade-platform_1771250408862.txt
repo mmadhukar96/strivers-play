@@ -1,0 +1,158 @@
+Upgrade Strivers Play into a multi-game arcade platform.
+
+====================================
+GOAL
+====================================
+
+Add support for multiple games:
+1) Dice Battle (existing)
+2) Math Blitz
+3) Memory Flip
+4) Speed Click
+
+Use scalable architecture so future games can be added easily.
+
+====================================
+ROUTING
+====================================
+
+Create dynamic routing:
+
+/games                → Game Selection Page
+/games/dice          → Dice Battle
+/games/math          → Math Blitz
+/games/memory        → Memory Flip
+/games/speed         → Speed Click
+
+Use React Router (if not already used).
+
+====================================
+GAME SELECTION PAGE
+====================================
+
+Create a modern card grid layout:
+
+Each card should show:
+- Game icon
+- Game title
+- Short description
+- Difficulty badge
+- "Play Now" button
+
+Add hover animation.
+
+====================================
+GAME 1: MATH BLITZ
+====================================
+
+Rules:
+- Player has 60 seconds
+- Random math questions (addition, subtraction, multiplication)
+- Score increases by 10 per correct answer
+- Wrong answer → -5 points
+
+State:
+- timer
+- score
+- currentQuestion
+- userAnswer
+
+On finish:
+- XP reward = score / 2
+- Coins = score / 5
+
+====================================
+GAME 2: MEMORY FLIP
+====================================
+
+Rules:
+- 4x4 grid (8 matching pairs)
+- Click to flip 2 cards
+- If match → stay open
+- If not → flip back after 800ms
+
+Track:
+- moves
+- timeTaken
+
+Reward:
+- XP = 100 - moves
+- Coins = 20
+
+====================================
+GAME 3: SPEED CLICK
+====================================
+
+Rules:
+- Random button appears on screen
+- Player must click within 1 second
+- 30 rounds
+- Each success = 5 points
+
+Track:
+- reactionTime
+- score
+
+Reward:
+- XP = score * 2
+- Coins = score / 2
+
+====================================
+XP SYSTEM INTEGRATION
+====================================
+
+Create reusable function:
+
+function rewardPlayer(xp, coins) {
+  updateUserXP()
+  updateUserCoins()
+  updateLevelIfNeeded()
+}
+
+Use this across all games.
+
+====================================
+LEADERBOARD UPGRADE
+====================================
+
+Modify leaderboard to include:
+
+- Overall XP
+- Game-specific rankings
+- Filter dropdown by game
+
+====================================
+STRUCTURE REQUIREMENTS
+====================================
+
+Create folder structure:
+
+client/
+  pages/
+    Games.tsx
+    Dice.tsx
+    Math.tsx
+    Memory.tsx
+    Speed.tsx
+
+  components/
+    GameCard.tsx
+    Timer.tsx
+    ScoreBoard.tsx
+
+shared/
+  types.ts
+
+server/
+  routes/games.ts
+
+====================================
+IMPORTANT
+====================================
+
+Do NOT break Dice Battle.
+Keep dark purple UI theme.
+Use reusable components.
+Add comments.
+Keep clean architecture.
+Prepare for scaling to 10+ games later.
