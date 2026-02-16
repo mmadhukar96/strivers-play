@@ -1,0 +1,112 @@
+Upgrade the DiceBattle game to a full turn-based battle system with deeper mechanics.
+
+========================
+GAME STRUCTURE
+========================
+
+Implement proper turn-based combat:
+
+State variables:
+- playerHP (start 100)
+- aiHP (start 100)
+- isPlayerTurn (true initially)
+- battleLog (array of strings)
+- shieldActive (boolean)
+- xp
+- coins
+- isPro (affects XP multiplier)
+
+========================
+PLAYER TURN LOGIC
+========================
+
+When player clicks "Roll Dice":
+
+1. Generate random number (1–6)
+2. Apply rules:
+
+If dice === 6:
+   - Critical Hit → 35 damage to AI
+   - Add log: "🔥 Critical Hit! 35 damage!"
+
+If dice === 1:
+   - Self damage → Player loses 10 HP
+   - Add log: "💥 Bad luck! You hurt yourself."
+
+If dice > 3 (4 or 5):
+   - Normal attack → 20 damage
+
+If dice <= 3 (2 or 3):
+   - Activate shield
+   - Add log: "🛡 Shield activated for next attack"
+
+After player action:
+- Switch to AI turn after short delay (800ms)
+
+========================
+AI TURN LOGIC
+========================
+
+AI randomly attacks:
+- Random damage between 10–25
+
+If shieldActive:
+   - Reduce AI damage by 50%
+   - Reset shieldActive to false
+   - Add log: "🛡 Shield reduced damage!"
+
+Apply damage to player.
+
+Switch back to player turn.
+
+========================
+WIN CONDITION
+========================
+
+If AI HP <= 0:
+   - Show Victory Modal
+   - XP reward = 50
+   - If isPro → XP reward = 100
+   - Coins reward = 20
+   - Add to user state
+   - Show button: "Play Again"
+
+If Player HP <= 0:
+   - Show Defeat Modal
+   - XP reward = 10
+   - Show button: "Try Again"
+
+========================
+BATTLE LOG
+========================
+
+Display last 5 battle events.
+Auto-scroll newest at bottom.
+
+========================
+UI IMPROVEMENTS
+========================
+
+- Disable roll button during AI turn
+- Add HP bar animation effect
+- Add small shake effect on damage
+- Add smooth transitions
+
+========================
+RESET FUNCTION
+========================
+
+Create resetBattle() function that:
+- Restores HP to 100
+- Clears log
+- Resets shield
+- Sets player turn true
+
+========================
+IMPORTANT
+========================
+
+Keep code modular.
+Add comments.
+Do not break existing layout.
+Keep it production structured.
