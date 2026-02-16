@@ -146,29 +146,29 @@ export default function Game() {
         </div>
 
         {/* Battle Arena */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
           
           {/* Player Card */}
           <div className={cn(
-            "relative p-6 rounded-2xl border-2 transition-all duration-300",
+            "relative p-4 md:p-6 rounded-2xl border-2 transition-all duration-300",
             turn === 'player' ? "border-primary bg-primary/5 shadow-[0_0_20px_rgba(168,85,247,0.15)]" : "border-border bg-card"
           )}>
-            <div className="flex justify-between items-start mb-6">
+            <div className="flex justify-between items-start mb-4 md:mb-6">
               <div>
-                <h3 className="text-xl font-bold">{user?.username}</h3>
-                <p className="text-sm text-muted-foreground">Level {user?.level}</p>
+                <h3 className="text-lg md:text-xl font-bold">{user?.username}</h3>
+                <p className="text-xs md:text-sm text-muted-foreground">Level {user?.level}</p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                <Heart className="w-6 h-6 text-primary" />
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                <Heart className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </div>
             </div>
             
             <div className="space-y-2">
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-xs md:text-sm">
                 <span>HP</span>
                 <span>{playerHp}/100</span>
               </div>
-              <div className="h-4 bg-secondary rounded-full overflow-hidden">
+              <div className="h-3 md:h-4 bg-secondary rounded-full overflow-hidden">
                 <motion.div 
                   className="h-full bg-gradient-to-r from-primary to-accent"
                   initial={{ width: "100%" }}
@@ -177,33 +177,33 @@ export default function Game() {
               </div>
             </div>
 
-            <div className="mt-8 flex justify-center h-24 items-center">
-              {playerAction === 'attack' && <Sword className="w-12 h-12 text-accent animate-bounce" />}
-              {playerAction === 'defend' && <Shield className="w-12 h-12 text-primary animate-pulse" />}
+            <div className="mt-4 md:mt-8 flex justify-center h-16 md:h-24 items-center">
+              {playerAction === 'attack' && <Sword className="w-10 h-10 md:w-12 md:h-12 text-accent animate-bounce" />}
+              {playerAction === 'defend' && <Shield className="w-10 h-10 md:w-12 md:h-12 text-primary animate-pulse" />}
             </div>
           </div>
 
           {/* Enemy Card */}
           <div className={cn(
-            "relative p-6 rounded-2xl border-2 transition-all duration-300",
+            "relative p-4 md:p-6 rounded-2xl border-2 transition-all duration-300",
             turn === 'enemy' ? "border-red-500 bg-red-500/5 shadow-[0_0_20px_rgba(239,68,68,0.15)]" : "border-border bg-card"
           )}>
-            <div className="flex justify-between items-start mb-6">
+            <div className="flex justify-between items-start mb-4 md:mb-6">
               <div>
-                <h3 className="text-xl font-bold">Dark Knight</h3>
-                <p className="text-sm text-muted-foreground">Level ??</p>
+                <h3 className="text-lg md:text-xl font-bold">Dark Knight</h3>
+                <p className="text-xs md:text-sm text-muted-foreground">Level ??</p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center">
-                <Skull className="w-6 h-6 text-red-500" />
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-500/20 flex items-center justify-center">
+                <Skull className="w-5 h-5 md:w-6 md:h-6 text-red-500" />
               </div>
             </div>
             
             <div className="space-y-2">
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-xs md:text-sm">
                 <span>HP</span>
                 <span>{enemyHp}/100</span>
               </div>
-              <div className="h-4 bg-secondary rounded-full overflow-hidden">
+              <div className="h-3 md:h-4 bg-secondary rounded-full overflow-hidden">
                 <motion.div 
                   className="h-full bg-gradient-to-r from-red-500 to-orange-500"
                   initial={{ width: "100%" }}
@@ -212,25 +212,25 @@ export default function Game() {
               </div>
             </div>
 
-            <div className="mt-8 flex justify-center h-24 items-center">
-               <div className="text-6xl font-display font-bold text-muted-foreground/20">VS</div>
+            <div className="mt-4 md:mt-8 flex justify-center h-16 md:h-24 items-center">
+               <div className="text-4xl md:text-6xl font-display font-bold text-muted-foreground/20">VS</div>
             </div>
           </div>
         </div>
 
         {/* Controls Area */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Battle Log */}
-          <div className="md:col-span-2 bg-black/40 rounded-2xl p-4 h-48 overflow-y-auto border border-white/5 font-mono text-sm">
+          <div className="lg:col-span-2 bg-black/40 rounded-2xl p-4 h-40 md:h-48 overflow-y-auto border border-white/5 font-mono text-[10px] md:text-sm">
             <div className="space-y-2">
-              {logs.length === 0 && <p className="text-muted-foreground italic">Battle started...</p>}
+              {logs.length === 0 && <p className="text-muted-foreground italic text-xs md:text-sm">Battle started...</p>}
               {logs.map((log) => (
                 <div key={log.id} className={cn(
                   "py-1 px-2 rounded",
                   log.type === 'player' ? "bg-primary/10 text-primary-foreground" : 
                   log.type === 'enemy' ? "bg-red-500/10 text-red-200" : "text-muted-foreground"
                 )}>
-                  <span className="opacity-50 mr-2">[{new Date(log.id).toLocaleTimeString([], {hour12: false, hour: '2-digit', minute:'2-digit', second:'2-digit'})}]</span>
+                  <span className="opacity-50 mr-1 md:mr-2">[{new Date(log.id).toLocaleTimeString([], {hour12: false, hour: '2-digit', minute:'2-digit', second:'2-digit'})}]</span>
                   {log.text}
                 </div>
               ))}
@@ -239,46 +239,46 @@ export default function Game() {
           </div>
 
           {/* Action Panel */}
-          <div className="bg-card rounded-2xl p-6 border border-border flex flex-col items-center justify-center gap-4">
+          <div className="bg-card rounded-2xl p-4 md:p-6 border border-border flex flex-col items-center justify-center gap-3 md:gap-4">
              {!gameOver ? (
                <>
-                 <div className="w-20 h-20 bg-secondary rounded-xl flex items-center justify-center border-2 border-white/10">
+                 <div className="w-16 h-16 md:w-20 md:h-20 bg-secondary rounded-xl flex items-center justify-center border-2 border-white/10">
                    {diceValue ? (
-                     <span className="text-4xl font-bold">{diceValue}</span>
+                     <span className="text-3xl md:text-4xl font-bold">{diceValue}</span>
                    ) : (
-                     <Dices className="w-8 h-8 text-muted-foreground" />
+                     <Dices className="w-6 h-6 md:w-8 md:h-8 text-muted-foreground" />
                    )}
                  </div>
                  
                  <Button 
                    size="lg" 
-                   className="w-full text-lg h-12 bg-primary hover:bg-primary/90"
+                   className="w-full text-base md:text-lg h-10 md:h-12 bg-primary hover:bg-primary/90"
                    onClick={rollDice}
                    disabled={turn !== 'player' || isRolling}
                  >
                    {isRolling ? "Rolling..." : "Roll Dice"}
                  </Button>
-                 <p className="text-xs text-muted-foreground text-center">
+                 <p className="text-[10px] md:text-xs text-muted-foreground text-center">
                    Roll &gt; 3 to Attack (20 dmg)<br/>
                    Roll &le; 3 to Defend
                  </p>
                </>
              ) : (
-               <div className="text-center space-y-4 w-full">
+               <div className="text-center space-y-3 md:space-y-4 w-full">
                  {gameResult === 'win' ? (
                    <div>
-                     <Trophy className="w-12 h-12 text-yellow-500 mx-auto mb-2" />
-                     <h3 className="text-xl font-bold text-yellow-500">Victory!</h3>
-                     <p className="text-sm text-muted-foreground">+50 XP, +20 Coins</p>
+                     <Trophy className="w-10 h-10 md:w-12 md:h-12 text-yellow-500 mx-auto mb-1 md:mb-2" />
+                     <h3 className="text-lg md:text-xl font-bold text-yellow-500">Victory!</h3>
+                     <p className="text-xs md:text-sm text-muted-foreground">+50 XP, +20 Coins</p>
                    </div>
                  ) : (
                    <div>
-                     <Skull className="w-12 h-12 text-red-500 mx-auto mb-2" />
-                     <h3 className="text-xl font-bold text-red-500">Defeat</h3>
-                     <p className="text-sm text-muted-foreground">+10 XP</p>
+                     <Skull className="w-10 h-10 md:w-12 md:h-12 text-red-500 mx-auto mb-1 md:mb-2" />
+                     <h3 className="text-lg md:text-xl font-bold text-red-500">Defeat</h3>
+                     <p className="text-xs md:text-sm text-muted-foreground">+10 XP</p>
                    </div>
                  )}
-                 <Button onClick={resetGame} variant="outline" className="w-full">
+                 <Button onClick={resetGame} variant="outline" className="w-full h-10 md:h-12">
                    <RefreshCcw className="w-4 h-4 mr-2" /> Play Again
                  </Button>
                </div>

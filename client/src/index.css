@@ -65,6 +65,18 @@
   .neon-border {
     @apply border border-primary/50 shadow-[0_0_15px_rgba(168,85,247,0.3)];
   }
+
+  @layer utilities {
+    .xs\:flex {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 480px) {
+  .xs\:flex {
+    display: flex !important;
+  }
 }
 
 /* Custom Scrollbar */

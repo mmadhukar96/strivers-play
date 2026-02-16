@@ -27,31 +27,31 @@ export default function Dashboard() {
     <Layout>
       <div className="space-y-8">
         {/* Welcome Section */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/20 via-card to-card border border-white/5 p-8 md:p-12">
-          <div className="absolute top-0 right-0 p-4 opacity-10">
-            <Gamepad2 className="w-64 h-64 rotate-12" />
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/20 via-card to-card border border-white/5 p-6 md:p-12">
+          <div className="absolute top-0 right-0 p-4 opacity-10 hidden sm:block">
+            <Gamepad2 className="w-48 h-48 md:w-64 md:h-64 rotate-12" />
           </div>
           
           <div className="relative z-10 max-w-2xl">
             <motion.h1 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-display font-bold mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4"
             >
               Ready for battle, <span className="text-gradient">{user.username}</span>?
             </motion.h1>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-base md:text-lg text-muted-foreground mb-8">
               Your next challenge awaits. Win battles to earn XP and climb the global leaderboards.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/game">
-                <Button size="lg" className="h-14 px-8 text-lg bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 rounded-xl">
+                <Button size="lg" className="h-12 md:h-14 px-8 text-lg bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 rounded-xl w-full sm:w-auto">
                   <Swords className="mr-2 w-5 h-5" />
                   Play Dice Battle
                 </Button>
               </Link>
               <Link href="/leaderboard">
-                <Button variant="outline" size="lg" className="h-14 px-8 text-lg border-white/10 hover:bg-white/5 rounded-xl">
+                <Button variant="outline" size="lg" className="h-12 md:h-14 px-8 text-lg border-white/10 hover:bg-white/5 rounded-xl w-full sm:w-auto">
                   View Leaderboard
                 </Button>
               </Link>
