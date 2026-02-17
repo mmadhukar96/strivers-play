@@ -1,0 +1,153 @@
+Upgrade Strivers Play by adding a second game called "Math Blitz".
+
+IMPORTANT:
+Do NOT break existing Dice Battle functionality.
+Follow existing dark purple theme and UI system.
+Keep architecture clean and scalable.
+
+====================================
+STEP 1 — ROUTING
+====================================
+
+Add a new route:
+
+/games/math
+
+If a games page does not exist, create:
+
+/games → Shows list of available games
+
+Add Math Blitz card to that page.
+
+====================================
+STEP 2 — CREATE PAGE
+====================================
+
+Create:
+
+client/pages/MathBlitz.tsx
+
+Game Rules:
+- 60 second timer
+- Random math questions:
+  - addition
+  - subtraction
+  - multiplication
+- Each correct answer = +10 points
+- Wrong answer = -5 points
+
+State Required:
+- timeLeft
+- score
+- currentQuestion
+- userAnswer
+- gameStarted
+- gameEnded
+
+====================================
+STEP 3 — QUESTION GENERATOR
+====================================
+
+Create function:
+
+generateQuestion()
+
+Randomly generate numbers 1–20.
+Randomly choose operator (+, -, *).
+Return:
+{
+  question: "12 + 7",
+  answer: 19
+}
+
+====================================
+STEP 4 — TIMER SYSTEM
+====================================
+
+When game starts:
+- Start countdown from 60
+- Decrease every 1 second
+- When reaches 0 → end game
+
+Use useEffect for timer.
+
+====================================
+STEP 5 — UI DESIGN
+====================================
+
+Use same card style as Dice Battle.
+
+Layout:
+
+Title: "Math Blitz"
+Timer (top right)
+Score display
+Large math question
+Input field
+Submit button
+
+Add animation when correct answer:
+- Green flash
+
+When wrong:
+- Red flash
+
+====================================
+STEP 6 — GAME END SCREEN
+====================================
+
+When timer ends:
+
+Show:
+- Final Score
+- XP earned
+- Coins earned
+- Play Again button
+- Back to Games button
+
+====================================
+STEP 7 — XP + COINS INTEGRATION
+====================================
+
+Use existing XP system.
+
+Reward logic:
+
+XP = score / 2
+Coins = score / 5
+
+Call shared reward function to update user data.
+
+====================================
+STEP 8 — LEADERBOARD INTEGRATION
+====================================
+
+Update leaderboard to:
+- Track total XP
+- Track Math Blitz score
+- Allow filtering by game
+
+====================================
+STEP 9 — CLEAN ARCHITECTURE
+====================================
+
+Create reusable components:
+
+- Timer.tsx
+- ScoreBoard.tsx
+- GameContainer.tsx
+
+Keep code modular.
+
+====================================
+FINAL CHECK
+====================================
+
+Ensure:
+- Dice Battle still works
+- XP updates correctly
+- No console errors
+- Works on mobile
+- Dark theme maintained
+
+Add comments in code.
