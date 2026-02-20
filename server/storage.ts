@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type GameResult } from "@shared/schema";
+import { type User, type InsertUser, type GameResult, calculateRank } from "@shared/schema";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -18,13 +18,16 @@ export class MemStorage implements IStorage {
     this.currentId = 1;
     // Add some mock users for leaderboard
     this.createUser({ username: "CoderOne" }).then(u => {
-      this.users.set(u.id, { ...u, xp: 1200, level: 7, coins: 450, isPro: true });
+      const xp = 1200;
+      this.users.set(u.id, { ...u, xp, level: 7, coins: 450, isPro: true, rank: calculateRank(xp) });
     });
     this.createUser({ username: "ByteMaster" }).then(u => {
-      this.users.set(u.id, { ...u, xp: 850, level: 5, coins: 200 });
+      const xp = 850;
+      this.users.set(u.id, { ...u, xp, level: 5, coins: 200, rank: calculateRank(xp) });
     });
     this.createUser({ username: "Striver" }).then(u => {
-      this.users.set(u.id, { ...u, xp: 2100, level: 11, coins: 1000, isPro: true });
+      const xp = 2100;
+      this.users.set(u.id, { ...u, xp, level: 11, coins: 1000, isPro: true, rank: calculateRank(xp) });
     });
   }
 
@@ -46,7 +49,8 @@ export class MemStorage implements IStorage {
       xp: 0, 
       coins: 0, 
       level: 1, 
-      isPro: false 
+      isPro: false,
+      rank: "Bronze"
     };
     this.users.set(id, user);
     return user;
@@ -59,12 +63,14 @@ export class MemStorage implements IStorage {
     const newXp = user.xp + result.xpEarned;
     const newCoins = user.coins + result.coinsEarned;
     const newLevel = Math.floor(newXp / 200) + 1;
+    const newRank = calculateRank(newXp);
 
     const updatedUser = {
       ...user,
       xp: newXp,
       coins: newCoins,
       level: newLevel,
+      rank: newRank,
     };
     this.users.set(id, updatedUser);
     return updatedUser;

@@ -3,19 +3,25 @@ import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { RankBadge } from "@/components/rank-badge";
+import { getRankProgress } from "@shared/schema";
+import { Progress } from "@/components/ui/progress";
 import { 
   Gamepad2, 
   Trophy, 
   Zap, 
   ArrowRight,
   TrendingUp,
-  Swords
+  Swords,
+  ChevronRight
 } from "lucide-react";
 
 export default function Dashboard() {
   const { user } = useUser();
 
   if (!user) return null;
+
+  const rankProgress = getRankProgress(user.xp);
 
   const stats = [
     { label: "Level", value: user.level, icon: TrendingUp, color: "text-green-500" },
@@ -33,13 +39,28 @@ export default function Dashboard() {
           </div>
           
           <div className="relative z-10 max-w-2xl">
-            <motion.h1 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4"
-            >
-              Ready for battle, <span className="text-gradient">{user.username}</span>?
-            </motion.h1>
+            <div className="flex items-center gap-2 mb-4">
+              <motion.h1 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-3xl sm:text-4xl md:text-5xl font-display font-bold"
+              >
+                Ready for battle, <span className="text-gradient">{user.username}</span>?
+              </motion.h1>
+              <RankBadge rank={user.rank} className="scale-125" />
+            </div>
+
+            {/* Rank Progress */}
+            {rankProgress && (
+              <div className="mb-8 p-4 bg-white/5 rounded-xl border border-white/5 max-w-md">
+                <div className="flex justify-between items-center mb-2 text-sm font-medium">
+                  <span className="text-muted-foreground">{rankProgress.xpNeeded} XP to {rankProgress.nextRank}</span>
+                  <span className="text-primary">{Math.round(rankProgress.progress)}%</span>
+                </div>
+                <Progress value={rankProgress.progress} className="h-2" />
+              </div>
+            )}
+
             <p className="text-base md:text-lg text-muted-foreground mb-8">
               Your next challenge awaits. Win battles to earn XP and climb the global leaderboards.
             </p>

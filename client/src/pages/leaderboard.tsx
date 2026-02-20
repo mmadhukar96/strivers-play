@@ -1,5 +1,6 @@
 import { useLeaderboard } from "@/hooks/use-user";
 import { Layout } from "@/components/layout";
+import { RankBadge } from "@/components/rank-badge";
 import {
   Table,
   TableBody,
@@ -67,9 +68,12 @@ export default function Leaderboard() {
                         <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-xs font-bold text-white">
                           {user.username.charAt(0).toUpperCase()}
                         </div>
-                        <span className={user.isPro ? "text-primary font-semibold" : ""}>
-                          {user.username}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className={user.isPro ? "text-primary font-semibold" : ""}>
+                            {user.username}
+                          </span>
+                          <RankBadge rank={user.rank} />
+                        </div>
                         {user.isPro && (
                           <span className="text-[10px] bg-primary/20 text-primary px-1.5 py-0.5 rounded border border-primary/20">PRO</span>
                         )}
